@@ -8,35 +8,35 @@ class Usuario {
 	private $dtcadastro;
 
 	public function getIdUsuario() {
-		return $this->$idusuario;
+		return $this->idusuario;
 	}
 
 	public function setIdUsuario($value) {
-		return $idusuario = $value;
+		$this->idusuario = $value;
 	}
 
 	public function getDeslogin() {
-	return $this->$deslogin;
+		return $this->deslogin;
 	}
 
 	public function setDeslogin($value) {
-		return $deslogin = $value;
+		$this->deslogin = $value;
 	}
 
 	public function getDessenha() {
-	return $this->$dessenha;
+		return $this->dessenha;
 	}
 
 	public function setDessenha($value) {
-	return $dessenha = $value;
+		$this->dessenha = $value;
 	}
 
 	public function getDtCadastro() {
-		return $this->$dtcadastro;
+		return $this->dtcadastro;
 	}
 
 	public function setDtCadastro($value) {
-		return $dtcadastro = $value;
+		$this->dtcadastro = $value;
 	}
 
 	public function loadById($id) {
