@@ -26,9 +26,16 @@ echo json_encode($usuarios);
 //$usuario->login("maxi", "123456");
 //echo $usuario;
 
+//--Inserindo registro de usuario
+//$aluno = new Usuario("nova", "654321");
+//$aluno->insert();
+//echo $aluno;
+
 //--
-$aluno = new Usuario("nova", "654321");
-$aluno->insert();
-echo $aluno;
+$usuario = new Usuario();
+$usuario->loadById(5);
+$usuario->update("alterada","novapass123");
+
+echo $usuario;
 
 ?>

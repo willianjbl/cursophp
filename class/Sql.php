@@ -18,14 +18,14 @@ class Sql extends PDO {
 		
 		$statement->bindParam($key, $value);
 	}
-	//function de pesquisa no banco
+	//function de preparar/modificar os dados no banco
 	public function query($rawQuery, $params = array()){
 		$stmt = $this->conn->prepare($rawQuery);
 		$this->setParams($stmt, $params);
 		$stmt->execute();
 		return $stmt;
 	}
-	//function para puxar os dados do banco em arrays
+	//function para puxar/buscar os dados do banco
 	public function select($rawQuery, $params = array()):array {
 		$stmt = $this->query($rawQuery, $params);
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
