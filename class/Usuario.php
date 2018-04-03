@@ -49,7 +49,10 @@ class Usuario {
 	//Function para carregar dados no banco por um ID específico
 	public function loadById($id) {
 		$sql = new Sql();
-		$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(":ID"=>$id));
+		
+		$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID", array(
+			':ID'=>$id
+		));
 		/*Criando condição "Se INDEX for MAIOR que '0', exibir '$results' no INDEX 0", como o a function está pesquisando por ID,
 		ela só irá carregar uma linha da table, já que a coluna é uma PRIMARY_KEY.*/
 		if (count($results) > 0) {
@@ -64,6 +67,7 @@ class Usuario {
 	//Function para carregar uma lista de usuarios, buscando no banco por Login.
 	public static function search($login){
 		$sql = new Sql();
+		
 		return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
 			':SEARCH'=>"%".$login."%"
 		));
@@ -71,7 +75,10 @@ class Usuario {
 	//Function para acessar os dados do usuario, autenticando o mesmo por Login e Senha.
 	public function login($login, $password){
 		$sql = new Sql();
-		$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD", array(":LOGIN"=>$login, ":PASSWORD"=>$password));
+		
+		$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD", array(
+			':LOGIN'=>$login,
+			':PASSWORD'=>$password));
 
 		if (count($results) > 0) {
 			$this->setData($results[0]);
@@ -82,8 +89,10 @@ class Usuario {
 	//Inserir dados na tabela com stored procedure
 	public function insert() {
 		$sql = new Sql();
+		
 		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :PASSWORD)", array(
-			':LOGIN'=>$this->getDeslogin(),':PASSWORD'=>$this->getDessenha()
+			':LOGIN'=>$this->getDeslogin(),
+			':PASSWORD'=>$this->getDessenha()
 		));
 		
 		if (count($results) > 0) {
@@ -107,6 +116,19 @@ class Usuario {
 			':PASSWORD'=>$this->getDessenha(),
 			':ID'=>$this->getIdUsuario()
 		));
+	}
+	//Function para deletar dados na tabela
+	public function delete(){
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID", array(
+			':ID'=>$this->getIdUsuario()
+		));
+
+		$this->setIdUsuario(0);
+		$this->setDeslogin("");
+		$this->setDessenha("");
+		$this->setDtCadastro(new DateTime());
 	}
 	//Criando function passar dados da function para uma String por JSON
 	public function __toString(){

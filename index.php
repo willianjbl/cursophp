@@ -31,11 +31,16 @@ echo json_encode($usuarios);
 //$aluno->insert();
 //echo $aluno;
 
-//--
-$usuario = new Usuario();
-$usuario->loadById(5);
-$usuario->update("alterada","novapass123");
+//--Alterando os dados de registro no Usuario;
+//$usuario = new Usuario();
+//$usuario->loadById(5);
+//$usuario->update("alterada","novapass123");
+//echo $usuario;
 
-echo $usuario;
+//--Excluindo usuario do banco
+//$apagar = new Usuario();
+//$apagar->loadById(4);
+//$apagar->delete();
+//echo $apagar;
 
 ?>
